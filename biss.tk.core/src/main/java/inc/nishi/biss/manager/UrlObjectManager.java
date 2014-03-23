@@ -2,6 +2,7 @@ package inc.nishi.biss.manager;
 
 import inc.nishi.biss.dto.UrlObjectRequestDTO;
 import inc.nishi.biss.model.UrlObject;
+import inc.nishi.biss.model.UrlVisit;
 
 import java.util.List;
 
@@ -20,9 +21,10 @@ public interface UrlObjectManager {
 
     /**
      * @param hash    short URL identifier
+     * @param urlVisit     urlVisit object to update statistics
      * @return UrlObject containing longUrl
      */
-    public UrlObject retrieve(String hash);
+    public UrlObject retrieve(String hash, UrlVisit urlVisit);
 
     /**
      * @param requestDTO    requestDTO object

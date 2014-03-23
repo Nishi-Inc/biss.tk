@@ -5,10 +5,11 @@ import com.mongodb.DBObject;
 import inc.nishi.biss.dao.UrlObjectDAO;
 import inc.nishi.biss.dto.UrlObjectRequestDTO;
 import inc.nishi.biss.model.UrlObject;
-import inc.nishi.biss.util.GlobalConstants;
-import inc.nishi.biss.util.GsonUtils;
+import inc.nishi.biss.model.UrlVisit;
+import inc.nishi.biss.util.BissCoreConfig;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,12 +23,20 @@ public class UrlObjectDAOImpl extends BissDAOSupport implements UrlObjectDAO {
     public void save(UrlObject urlObject) {
         urlObject.setSequence(this.getNextSequence());
         this.getDBCollection(UrlObject.class.getSimpleName())
-                .save(GsonUtils.gson.fromJson(GsonUtils.gson.toJson(urlObject), BasicDBObject.class));
+                .save(this.convertToDBObject(urlObject));
     }
 
     @Override
-    public UrlObject retrieve(long sequence) {
-        return null;
+    public UrlObject retrieve(long sequence, UrlVisit urlVisit) {
+        DBObject queryObject = new BasicDBObject("sequence", sequence);
+        DBObject updateObject = new BasicDBObject("$push", new BasicDBObject("statistics.hits",
+                this.convertToDBObject(urlVisit)));
+
+        updateObject.put("$set", new BasicDBObject("lastModifiedOn", this.getGson().toJson(new Date())));
+
+        DBObject fetchedUrlObject = this.getDBCollection(UrlObject.class.getSimpleName())
+                .findAndModify(queryObject, null, null, false, updateObject, true, true);
+        return this.convert(fetchedUrlObject, UrlObject.class);
     }
 
     @Override
@@ -36,9 +45,16 @@ public class UrlObjectDAOImpl extends BissDAOSupport implements UrlObjectDAO {
     }
 
     private long getNextSequence() {
-        DBObject projection = new BasicDBObject(GlobalConstants.SEQUENCE, true);
-        return (Long) this.getDBCollection(UrlObject.class.getSimpleName()).find(new BasicDBObject(), projection)
-                .limit(1).next().get(GlobalConstants.SEQUENCE);
+//        DBObject projection = new BasicDBObject(GlobalConstants.SEQUENCE, true);
+//        try {
+//            return (Long) this.getDBCollection(UrlObject.class.getSimpleName()).find(new BasicDBObject(), projection)
+//                    .limit(1).next().get(GlobalConstants.SEQUENCE);
+//        } catch (NoSuchElementException e) {
+//            return 0;
+//        }
+
+        return ((long) this.getDBCollection(BissCoreConfig.COUNTER_COLLECTION_NAME).findAndModify(new BasicDBObject(),
+                null, null, false, new BasicDBObject("$inc", new BasicDBObject("value", 1)), true, false).get("value"));
     }
 
 }

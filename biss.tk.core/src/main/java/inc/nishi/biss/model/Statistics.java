@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author shuklaalok7
@@ -13,6 +14,10 @@ import java.io.Serializable;
 @Setter
 public class Statistics implements Serializable {
 
-    private Long hits;
+    private List<UrlVisit> hits;
+
+    public long getTotalHits() {
+        return this.getHits().size();
+    }
 
 }

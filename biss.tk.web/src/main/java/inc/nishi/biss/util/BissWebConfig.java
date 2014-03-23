@@ -8,5 +8,5 @@ public abstract class BissWebConfig {
 
     public static final String DOMAIN = "biss.tk/";
     public static final String PAGE_TITLE = "biss.tk: shorten URL";
-
+    public static final String HTTP_PROTOCOL = "http://";
 }

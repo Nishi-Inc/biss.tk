@@ -16,6 +16,7 @@ public class UrlObject extends PersistentObject {
     private String url;
     private Date expiryDate;
     private Statistics statistics;
+    private int maxHits;
 
     public UrlObject() {
         super();
@@ -46,4 +47,7 @@ public class UrlObject extends PersistentObject {
         return 0;
     }
 
+    public long getMaxHits() {
+        return maxHits;
+    }
 }

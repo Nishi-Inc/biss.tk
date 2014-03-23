@@ -1,13 +1,14 @@
 package inc.nishi.biss.actions;
 
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 import inc.nishi.biss.manager.UrlObjectManager;
 import inc.nishi.biss.util.BissWebConfig;
 import inc.nishi.biss.util.ServiceLocator;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.struts2.convention.annotation.*;
+import org.apache.struts2.dispatcher.DefaultActionSupport;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -19,13 +20,21 @@ import java.util.Map;
 
 @Getter
 @Setter
-public abstract class BissActionSupport extends ActionSupport implements SessionAware, ServletRequestAware,
+@Namespace("/")
+@ResultPath("/pages")
+@ExceptionMappings({
+        @ExceptionMapping(exception = "java.lang.Exception", result = "error.jsp")
+})
+@Result(name = BissActionSupport.ERROR, location = "error.jsp")
+public abstract class BissActionSupport extends DefaultActionSupport implements SessionAware, ServletRequestAware,
         ServletResponseAware, ParameterAware, Preparable {
+
+    protected static final String REDIRECT = "redirect";
 
     private Map<String, Object> session;
     private Map<String, String[]> parameters;
-    private HttpServletRequest httpServletRequest;
-    private HttpServletResponse httpServletResponse;
+    private HttpServletRequest servletRequest;
+    private HttpServletResponse servletResponse;
 
     private String pageTitle;
 
@@ -48,12 +57,12 @@ public abstract class BissActionSupport extends ActionSupport implements Session
 
     @Override
     public void setServletRequest(HttpServletRequest request) {
-        this.httpServletRequest = request;
+        this.servletRequest = request;
     }
 
     @Override
     public void setServletResponse(HttpServletResponse response) {
-        this.httpServletResponse = response;
+        this.servletResponse = response;
     }
 
     public UrlObjectManager getUrlObjectManager() {

@@ -3,6 +3,7 @@ package inc.nishi.biss.manager.impl;
 import inc.nishi.biss.dto.UrlObjectRequestDTO;
 import inc.nishi.biss.manager.UrlObjectManager;
 import inc.nishi.biss.model.UrlObject;
+import inc.nishi.biss.model.UrlVisit;
 import inc.nishi.biss.util.BissUtils;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,13 @@ public class UrlObjectManagerImpl extends BissManagerSupport implements UrlObjec
 
     @Override
     public String save(UrlObject urlObject) {
-//        this.urlObjectDAO.save(urlObject);
+        this.urlObjectDAO.save(urlObject);
         return this.getHash(urlObject);
     }
 
     @Override
-    public UrlObject retrieve(String hash) {
-        return this.urlObjectDAO.retrieve(this.getSequence(hash));
+    public UrlObject retrieve(String hash, UrlVisit urlVisit) {
+        return this.urlObjectDAO.retrieve(this.getSequence(hash), urlVisit);
     }
 
     @Override

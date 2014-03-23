@@ -3,6 +3,50 @@
     border: 1px;
 }
 
+table.centered td {
+    text-align: center;
+}
+
+.caret-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 4px solid #000000;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    content: "";
+}
+
+.caret-up {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-bottom: 4px solid #000000;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    content: "";
+}
+
+.caret-right {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 4px solid #000000;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    content: "";
+}
+
+.caret-left {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-right: 4px solid #000000;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    content: "";
+}
+
 .blue {
     color : blue;
 }

@@ -10,4 +10,5 @@ public abstract class BissCoreConfig {
     public static final int PORT       = 27017;
     public static final String DB_NAME = "biss";
 
+    public static final String COUNTER_COLLECTION_NAME = "Counter";
 }

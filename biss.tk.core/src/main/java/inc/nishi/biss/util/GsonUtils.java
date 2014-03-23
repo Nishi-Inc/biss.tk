@@ -11,16 +11,6 @@ import java.util.Date;
  */
 public abstract class GsonUtils {
 
-    public static Gson gson;
-
-    public void init() {
-        GsonBuilder gsonBuilder = new GsonBuilder().enableComplexMapKeySerialization();
-        gsonBuilder.registerTypeAdapter(Date.class, new GsonUtils.DateSerializer());
-        gsonBuilder.registerTypeAdapter(Date.class, new GsonUtils.DateDeserializer());
-
-        GsonUtils.gson = gsonBuilder.create();
-    }
-
     public static class DateSerializer implements JsonSerializer<Date> {
         @Override
         public JsonElement serialize(Date date, Type type,
