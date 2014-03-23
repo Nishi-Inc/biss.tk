@@ -1,7 +1,8 @@
 package inc.nishi.biss.manager.impl;
 
+import inc.nishi.biss.dao.DAOUtils;
 import inc.nishi.biss.dao.UrlObjectDAO;
-import inc.nishi.biss.dao.impl.DAOUtils;
+import inc.nishi.biss.manager.UrlObjectManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public abstract class BissManagerSupport {
+
+//    Managers
+    @Autowired(required = false)
+    protected UrlObjectManager urlObjectManager;
 
 //    DAO
 

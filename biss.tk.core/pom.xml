@@ -33,6 +33,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -62,6 +68,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
             <version>${spring-version}</version>
+        </dependency>
+
+        <!-- APACHE CODEC -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec-version}</version>
         </dependency>
 
     </dependencies>

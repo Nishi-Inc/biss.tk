@@ -1,4 +1,4 @@
-package inc.nishi.biss.dao.impl;
+package inc.nishi.biss.dao;
 
 /**
  * @author shuklaalok7

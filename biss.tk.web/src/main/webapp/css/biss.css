@@ -1,0 +1,32 @@
+
+.boxed {
+    border: 1px;
+}
+
+.blue {
+    color : blue;
+}
+
+.red {
+    color : red;
+}
+
+.orange {
+    color : orange;
+}
+
+.orangered {
+    color: orangered;
+}
+
+.green {
+    color: green;
+}
+
+.gray {
+    color: darkgray;
+}
+
+.grey {
+    color: #808080;
+}

@@ -3,6 +3,8 @@ package inc.nishi.biss.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 /**
  * @author shuklaalok7
  * @since 3/23/14
@@ -12,7 +14,22 @@ import lombok.Setter;
 public class UrlObject extends PersistentObject {
 
     private String url;
+    private Date expiryDate;
     private Statistics statistics;
+
+    public UrlObject() {
+        super();
+    }
+
+    public UrlObject(String url) {
+        this();
+        this.url = url;
+    }
+
+    public UrlObject(String url, Date expiryDate) {
+        this(url);
+        this.expiryDate = expiryDate;
+    }
 
     @Override
     public boolean equals(Object object) {

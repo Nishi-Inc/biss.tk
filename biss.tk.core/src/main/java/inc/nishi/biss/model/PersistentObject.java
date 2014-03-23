@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author shuklaalok7
@@ -15,7 +16,18 @@ public abstract class PersistentObject implements Serializable, Comparable {
 
     private MongoObjectId _id;
 
-    private Long createdOn;
-    private Long lastModifiedOn;
+    private long createdOn;
+    private long lastModifiedOn;
+    private long sequence;
 
+    protected PersistentObject() {
+        super();
+        this.createdOn = new Date().getTime();
+        this.lastModifiedOn = this.createdOn;
+    }
+
+    protected PersistentObject(MongoObjectId _id) {
+        this();
+        this._id = _id;
+    }
 }
